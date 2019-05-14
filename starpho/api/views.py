@@ -1,8 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from PIL import Image
 import os
-import cv2
 from static.get_single_score import get_s_score
 
 
@@ -10,12 +8,15 @@ from static.get_single_score import get_s_score
 def get_single_score(request):
     if request.method == 'POST':
         obj = request.FILES.get('img')
-        f = open(os.path.join('api/img/', obj.name), 'wb')
+        path = os.path.join('api/img/', obj.name)
+        f = open(path, 'wb')
         for line in obj.chunks():
             f.write(line)
         f.close()
 
         score = get_s_score(obj.name)
+
+        os.remove(path)
 
     return HttpResponse(score)
 

@@ -61,18 +61,18 @@ def get_s_score(img_name):
         model.load_weights(BASE_DIR + '\static\weights\mobilenet_score_animal.h5')
 
         img_path=BASE_DIR + r'\api\img\\' + img_name
-        print(1)
+        #print(1)
         img = load_img(img_path, target_size=target_size)
-        print(2)
+        #print(2)
         x = img_to_array(img)
         x = np.expand_dims(x, axis=0)
         x = preprocess_input(x)
         pred_scores = model.predict(x, batch_size=1, verbose=0)[0]
                 #print(np.argmax(pred_scores)+1)
-        print(3)
+        #print(3)
         mean = mean_score(pred_scores)
         #std = std_score(pred_scores)
-        print(mean)
+        #print(mean)
         #file_name = Path(img_path).name.lower()
         #print(mean)
               
